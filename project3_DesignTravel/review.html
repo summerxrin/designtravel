@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Travel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
+
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.m_menu');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <a name="top"></a>
+        <div class="header">
+            <div class="header1 web">
+                <div class="inner">
+                    <ul class="h1_l">
+                        <li><a href="#">여행정보</a></li>
+                        <li class="line"><a href="#">이벤트</a></li>
+                        <li class="line"><a href="#">앱다운</a></li>
+                    </ul>
+                    <ul class="h1_r">
+                        <li><a href="#">로그인</a></li>
+                        <li class="line"><a href="#">회원가입</a></li>
+                        <li class="line"><a href="#">예약확인/결제</a></li>
+                        <li class="line"><a href="#">고객센터</a></li>
+                        <li><a href="#"><img src="img/search.png" alt="search"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header2 web">
+                <div class="inner">
+                    <div class="logo">
+                        <a href="index.html"><img src="img/logo.png" alt="logo"></a>
+                    </div>
+                    <ul class="menu">
+                        <li><a href="#">나의 DT</a>
+                            <ul>
+                                <li><a href="#">일정만들기</a></li>
+                                <li><a href="#">여행자보험</a></li>
+                                <li><a href="#">비자</a></li>
+                                <li><a href="#">픽업/샌딩</a></li>
+                                <li><a href="#">WIFI/SIM</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">항공</a>
+                            <ul>
+                                <li><a href="ticket.html">항공권</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">숙소</a>
+                            <ul>
+                                <li><a href="#">호텔·리조트</a></li>
+                                <li><a href="#">펜션·풀빌라</a></li>
+                                <li><a href="#">감성숙소</a></li>
+                                <li><a href="#">한달살기</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">투어&amp;액티비티</a>
+                            <ul>
+                                <li><a href="#">현지투어</a></li>
+                                <li><a href="#">액티비티</a></li>
+                                <li><a href="#">체험&amp;클래스</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">티켓&amp;패스</a>
+                            <ul>
+                                <li><a href="#">입장권</a></li>
+                                <li><a href="#">교통패스</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">렌터카</a>
+                            <ul>
+                                <li><a href="rentcar.html">이벤트</a></li>
+                                <li><a href="#">실시간 렌터카</a></li>
+                                <li><a href="#">미주 Tip</a></li>
+                                <li><a href="#">캐나다 Tip</a></li>
+                                <li><a href="#">유럽 Tip</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">여행후기</a>
+                            <ul>
+                                <li><a href="review.html">여행후기</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header3 mob">
+                <div class="inner">
+                    <div class="m_menu">
+                        <img src="img/m_menu.png" alt="menu">
+                    </div>
+                    <nav class="left_gnbWrap">
+                        <a href="#" class="close"><img src="img/close.png" alt="close"></a>
+                        <ul class="left_gnb">
+                            <li>
+                                <a href="#">나의 DT</a>
+                                <ul>
+                                    <li><a href="#">일정만들기</a></li>
+                                    <li><a href="#">여행자보험</a></li>
+                                    <li><a href="#">비자</a></li>
+                                    <li><a href="#">픽업/샌딩</a></li>
+                                    <li><a href="#">WIFI/SIM</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">항공</a>
+                                <ul>
+                                    <li><a href="ticket.html">항공권</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">숙소</a>
+                                <ul>
+                                    <li><a href="#">호텔·리조트</a></li>
+                                    <li><a href="#">펜션·풀빌라</a></li>
+                                    <li><a href="#">감성숙소</a></li>
+                                    <li><a href="#">한달살기</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">투어&amp;액티비티</a>
+                                <ul>
+                                    <li><a href="#">현지투어</a></li>
+                                    <li><a href="#">액티비티</a></li>
+                                    <li><a href="#">체험&amp;클래스</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">티켓&amp;패스</a>
+                                <ul>
+                                    <li><a href="#">입장권</a></li>
+                                    <li><a href="#">교통패스</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">렌터카</a>
+                                <ul>
+                                    <li><a href="rentcar.html">이벤트</a></li>
+                                    <li><a href="#">실시간 렌터카</a></li>
+                                    <li><a href="#">미주 Tip</a></li>
+                                    <li><a href="#">캐나다 Tip</a></li>
+                                    <li><a href="#">유럽 Tip</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">여행후기</a>
+                                <ul>
+                                    <li><a href="review.html">여행후기</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="m_logo animate__pulse animate__animated">
+                        <a href="index.html"><img src="img/logo.png" alt="logo"></a>
+                    </div>
+                    <div class="m_search">
+                        <img src="img/m_search.png" alt="search">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contents review">
+            <div class="inner">
+                <h3 class="animate__animated animate__rotateIn">REVIEWS</h3>
+                <h1 class="animate__animated animate__rotateIn">여행 후기</h1>
+                <ul>
+                    <li>
+                        <div class="colour violet">
+                            <a href="#">
+                                <i class="web"><img src="img/france.png" alt="France"></i>
+                                <i class="mob"><img src="img/paris.png" alt="Paris"></i>
+                                <div>
+                                    <h4>프랑스<span class="mob">_파리</span></h4>
+                                    <p class="web">파리에서의 황홀했던 시간들<br>_정예린 고객님의 후기</p>
+                                    <p class="mob">파리에서 보낸 <br>잊을 수 없는<br>황홀한 시간들</p>
+                                    <p class="mob summer">- 정예린 고객님의 후기</p>
+                                    <div class="mob see">보러가기 ></div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour skyblue">
+                            <a href="#">
+                                <img src="img/uk.png" alt="UK">
+                                <div>
+                                    <h4>영국</h4>
+                                    <p>런던의 환상적인 노을!<br>_정예린 고객님의 후기</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour babypink">
+                            <a href="#">
+                                <img src="img/usa.png" alt="USA">
+                                <div>
+                                    <h4>미국</h4>
+                                    <p>LA에서 드디어 할리우드를 만나다!<br>_정예린 고객님의 후기</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="colour skyblue">
+                            <a href="#">
+                                <i class="web"><img src="img/portugal.png" alt="Portugal"></i>
+                                <i class="mob"><img src="img/porto.png" alt="Proto"></i>
+                                <div>
+                                    <h4>포르투갈<span class="mob">_포르투</span></h4>
+                                    <p class="web">포르투의 시간은 느리게 간다<br>_정예린 고객님의 후기</p>
+                                    <p class="mob">여유가 가득한 도시,<br>포르투의 시간은<br>느리게 간다</p>
+                                    <p class="mob summer">- 정예린 고객님의 후기</p>
+                                    <div class="mob see">보러가기 ></div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour babypink">
+                            <a href="#">
+                                <img src="img/thailand.png" alt="Thailand">
+                                <div>
+                                    <h4>태국</h4>
+                                    <p>방콕에서 역사를 배우다!<br>_정예린 고객님의 후기</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour ygreen">
+                            <a href="#">
+                                <img src="img/hongkong.png" alt="Hongkong">
+                                <div>
+                                    <h4>홍콩</h4>
+                                    <p>홍콩 특유의 감성 100배 즐기기<br>_정예린 고객님의 후기</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="colour babypink">
+                            <a href="#">
+                                <i class="web"><img src="img/spain.png" alt="Spain"></i>
+                                <i class="mob"><img src="img/sevilla.png" alt="Sevilla"></i>
+                                <div>
+                                    <h4>스페인<span class="mob">_세비야</span></h4>
+                                    <p class="web">탱고의 도시 정열적인 세비야<br>_정예린 고객님의 후기</p>
+                                    <p class="mob">탱고의 도시, 세비야의<br>정열적인 분위기에<br>흠뻑취해보기</p>
+                                    <p class="mob summer">- 정예린 고객님의 후기</p>
+                                    <div class="mob see">보러가기 ></div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour ygreen">
+                            <a href="#">
+                                <img src="img/cebu.png" alt="Philippines">
+                                <div>
+                                    <h4>필리핀</h4>
+                                    <p>세부에서 호캉스 만끽하기<br>_정예린 고객님의 후기 </p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour violet">
+                            <a href="#">
+                                <img src="img/german.png" alt="Germany">
+                                <div>
+                                    <h4>독일</h4>
+                                    <p>디즈니 만화속에 온것같은 여행<br>_정예린 고객님의 후기</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="colour ygreen">
+                            <a href="#">
+                                <i class="web"><img src="img/czecho.png" alt="Czech"></i>
+                                <i class="mob"><img src="img/prague.png" alt="Praha"></i>
+                                <div>
+                                    <h4>체코<span class="mob">_프라하</span></h4>
+                                    <p class="web">프라하와 사랑에 빠졌습니다<br>_정예린 고객님의 후기</p>
+                                    <p class="mob">사랑과 낭만이 가득한,<br>프라하와<br>사랑에 빠졌습니다</p>
+                                    <p class="mob summer">- 정예린 고객님의 후기</p>
+                                    <div class="mob see">보러가기 ></div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour violet">
+                            <a href="#">
+                                <img src="img/hungary.png" alt="Hungary">
+                                <div>
+                                    <h4>헝가리</h4>
+                                    <p>잊지못할 부다페스트의 야경<br>_정예린 고객님의 후기</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="web">
+                        <div class="colour skyblue">
+                            <a href="#">
+                                <img src="img/turkey.png" alt="Turkey">
+                                <div>
+                                    <h4>터키</h4>
+                                    <p>열기구에서 하늘과 하나된 시간<br>_정예린 고객님의 후기</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="page">
+                    <span>
+                        <a href="#">&#8810;</a>
+                        <a href="#">&#60;</a>
+                        <a href="#" class="p_click">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">&#62;</a>
+                        <a href="#">&#8811;</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="inner">
+                <div class="footer1">
+                    <a href="#top">^<br>TOP</a>
+                </div>
+                <div class="footer2">
+                    <ul>
+                        <li><a href="http://www.naver.com"><img src="img/sns1.png" alt="blog"></a></li>
+                        <li><a href="http://www.instagram.com"><img src="img/sns2.png" alt="instagram"></a></li>
+                        <li><a href="http://www.facebook.com"><img src="img/sns3.png" alt="facebook"></a></li>
+                        <li><a href="http://www.kakaocorp.com"><img src="img/sns4.png" alt="kakaotalk"></a></li>
+                        <li><a href="http://www.youtube.com"><img src="img/sns5.png" alt="youtube"></a></li>
+                    </ul>
+                    <select>
+                        <option>관련 사이트</option>
+                        <option><a href="#">구글맵스</a></option>
+                    </select>
+                </div>
+                <div class="footer3">
+                    <ul>
+                        <li>회사소개</li>
+                        <li class="f_bold line">개인정보처리방침</li>
+                        <li class="line">여행약관</li>
+                        <li class="line">이용약관</li>
+                        <li class="line">여행보험</li>
+                        <li class="line">이메일무단수집거부</li>
+                    </ul>
+                    <p class="info">(주)여행에 반하다 대표이사 : 정예린 사업자번호 : 123-45-67890<br>부산광역시 부산진구 중앙대로 708&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>고객센터 1234-5678</span>&nbsp;&nbsp;&nbsp;평일 09시~18시(12시~13시 점심시간)(토/일/공휴일 휴무)</p>
+                    <p class="copyright">Copyright © SUMMERIN. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body></html>

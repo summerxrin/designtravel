@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Travel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+
+    <!--menu-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
+
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.m_menu');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+
+    </script>
+
+
+    <!--mainimg-->
+    <!--<link rel="stylesheet" href="css/flickerplate.css">
+    <script src="js/jquery-v1.10.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery-finger-v0.1.0.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('.flicker-example').flicker();
+        });
+
+    </script>-->
+</head>
+
+<body>
+    <div id="wrap">
+        <a name="top"></a>
+        <div class="header">
+            <div class="header1 web">
+                <div class="inner">
+                    <ul class="h1_l">
+                        <li><a href="#">여행정보</a></li>
+                        <li class="line"><a href="#">이벤트</a></li>
+                        <li class="line"><a href="#">앱다운</a></li>
+                    </ul>
+                    <ul class="h1_r">
+                        <li><a href="#">로그인</a></li>
+                        <li class="line"><a href="#">회원가입</a></li>
+                        <li class="line"><a href="#">예약확인/결제</a></li>
+                        <li class="line"><a href="#">고객센터</a></li>
+                        <li><a href="#"><img src="img/search.png" alt="search"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header2 web">
+                <div class="inner">
+                    <div class="logo">
+                        <a href="index.html"><img src="img/logo.png" alt="logo"></a>
+                    </div>
+                    <ul class="menu">
+                        <li><a href="#">나의 DT</a>
+                            <ul>
+                                <li><a href="#">일정만들기</a></li>
+                                <li><a href="#">여행자보험</a></li>
+                                <li><a href="#">비자</a></li>
+                                <li><a href="#">픽업/샌딩</a></li>
+                                <li><a href="#">WIFI/SIM</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">항공</a>
+                            <ul>
+                                <li><a href="ticket.html">항공권</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">숙소</a>
+                            <ul>
+                                <li><a href="#">호텔·리조트</a></li>
+                                <li><a href="#">펜션·풀빌라</a></li>
+                                <li><a href="#">감성숙소</a></li>
+                                <li><a href="#">한달살기</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">투어&amp;액티비티</a>
+                            <ul>
+                                <li><a href="#">현지투어</a></li>
+                                <li><a href="#">액티비티</a></li>
+                                <li><a href="#">체험&amp;클래스</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">티켓&amp;패스</a>
+                            <ul>
+                                <li><a href="#">입장권</a></li>
+                                <li><a href="#">교통패스</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">렌터카</a>
+                            <ul>
+                                <li><a href="rentcar.html">이벤트</a></li>
+                                <li><a href="#">실시간 렌터카</a></li>
+                                <li><a href="#">미주 Tip</a></li>
+                                <li><a href="#">캐나다 Tip</a></li>
+                                <li><a href="#">유럽 Tip</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">여행후기</a>
+                            <ul>
+                                <li><a href="review.html">여행후기</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header3 mob">
+                <div class="inner">
+                    <div class="m_menu">
+                        <img src="img/m_menu.png" alt="menu">
+                    </div>
+                    <nav class="left_gnbWrap">
+                        <a href="#" class="close"><img src="img/close.png" alt="close"></a>
+                        <ul class="left_gnb">
+                            <li>
+                                <a href="#">나의 DT</a>
+                                <ul>
+                                    <li><a href="#">일정만들기</a></li>
+                                    <li><a href="#">여행자보험</a></li>
+                                    <li><a href="#">비자</a></li>
+                                    <li><a href="#">픽업/샌딩</a></li>
+                                    <li><a href="#">WIFI/SIM</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">항공</a>
+                                <ul>
+                                    <li><a href="ticket.html">항공권</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">숙소</a>
+                                <ul>
+                                    <li><a href="#">호텔·리조트</a></li>
+                                    <li><a href="#">펜션·풀빌라</a></li>
+                                    <li><a href="#">감성숙소</a></li>
+                                    <li><a href="#">한달살기</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">투어&amp;액티비티</a>
+                                <ul>
+                                    <li><a href="#">현지투어</a></li>
+                                    <li><a href="#">액티비티</a></li>
+                                    <li><a href="#">체험&amp;클래스</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">티켓&amp;패스</a>
+                                <ul>
+                                    <li><a href="#">입장권</a></li>
+                                    <li><a href="#">교통패스</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">렌터카</a>
+                                <ul>
+                                    <li><a href="rentcar.html">이벤트</a></li>
+                                    <li><a href="#">실시간 렌터카</a></li>
+                                    <li><a href="#">미주 Tip</a></li>
+                                    <li><a href="#">캐나다 Tip</a></li>
+                                    <li><a href="#">유럽 Tip</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">여행후기</a>
+                                <ul>
+                                    <li><a href="review.html">여행후기</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="m_logo animate__pulse animate__animated">
+                        <a href="index.html"><img src="img/logo.png" alt="logo"></a>
+                    </div>
+                    <div class="m_search">
+                        <img src="img/m_search.png" alt="search">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mainimg">
+            <div class="animate__animated animate__fadeInUp">
+                <h1>여행을 디자인하다</h1>
+                <p>항공, 호텔, 투어, 액티비티 등<br class="mob"> 모든것을 자유롭게!</p>
+            </div>
+        </div>
+
+        <div class="contents">
+            <div class="box1">
+                <div class="inner">
+                    <h2>DESIGN TRAVEL'S EVENT</h2>
+                    <p class="more"><a href="#">더보기</a></p>
+                    <div class="prev"><a href="#"><img src="img/prev.png" alt="prev"></a></div>
+                    <ul class="event">
+                        <li>
+                            <div class="blue">
+                                <img src="img/jeju.png" alt="hotel">
+                                <div class="event_text">
+                                    <p class="bold">어디갈래, 제주올레?<br class="web"><br></p>
+                                    <p>사랑하는 사람과 함께<br>슬기로운 제주여행하기</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="web">
+                            <div class="yellow">
+                                <img src="img/hotel.png" alt="jeju">
+                                <div class="event_text">
+                                    <p class="bold">해외 인기호텔<br>미리선점 프로젝트</p>
+                                    <p>인기호텔에서 나만의<br>버킷리스트 실행하기</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="web">
+                            <div class="green">
+                                <img src="img/pet.png" alt="jeju">
+                                <div class="event_text">
+                                    <p class="bold">펫팸투어<br>PET + FAMILY</p>
+                                    <p>또 다른 나의 가족과 함께!</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="next"><a href="#"><img src="img/next.png" alt="next"></a></div>
+                </div>
+            </div>
+            <div class="box2">
+                <div class="inner">
+                    <div class="diagram">
+                        <div class="text">
+                            <h2>내멋대로 일정짜기</h2>
+                            <p>내가 좋아하는,<br class="web">나에게 필요한 준비물은?</p>
+                        </div>
+                        <a href="#">
+                            <div class="btn1">둘러보기</div>
+                        </a>
+                    </div>
+                    <div class="boxes">
+                        <div class="left">
+                            <div class="grey">
+                                <div class="grey_l">
+                                    <h2>상담문의<br><span>1515-1515</span></h2>
+                                    <p><span>상담시간</span><br>평일 10:00 ~ 15:00</p>
+                                </div>
+                                <div class="grey_r">
+                                    <h3>ARS 상담번호 안내</h3>
+                                    <table class="table">
+                                        <tr>
+                                            <th>1번 여행상담</th>
+                                            <th>3번 호텔, 현지투어, 패스문의</th>
+                                        </tr>
+                                        <tr>
+                                            <td>① 해외여행 ② 국내여행</td>
+                                            <td>① 해외호텔 ② 국내호텔</td>
+                                        </tr>
+                                        <tr>
+                                            <th>2번 항공권</th>
+                                            <td>③ 현지투어, 패스</td>
+                                        </tr>
+                                        <tr>
+                                            <td>① 해외항공 ② 국내항공</td>
+                                            <th>0번 ARS 결제</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <ul class="btn">
+                                <li class="yellow_w">
+                                    공지사항
+                                    <i><img src="img/right.png" alt="right"></i>
+                                </li>
+                                <li class="blue_w">
+                                    고객센터
+                                    <i><img src="img/right.png" alt="right"></i>
+                                </li>
+                                <li class="purple_w">
+                                    이용안내
+                                    <i><img src="img/right.png" alt="right"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <h3>DESIGN TRAVEL 이용자들의 생생한 후기 !</h3>
+                            <div class="btn2"><a href="review.html">후기 보기</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="inner">
+                <div class="footer1">
+                    <a href="#top">^<br>TOP</a>
+                </div>
+                <div class="footer2">
+                    <ul>
+                        <li><a href="http://www.naver.com"><img src="img/sns1.png" alt="blog"></a></li>
+                        <li><a href="http://www.instagram.com"><img src="img/sns2.png" alt="instagram"></a></li>
+                        <li><a href="http://www.facebook.com"><img src="img/sns3.png" alt="facebook"></a></li>
+                        <li><a href="http://www.kakaocorp.com"><img src="img/sns4.png" alt="kakaotalk"></a></li>
+                        <li><a href="http://www.youtube.com"><img src="img/sns5.png" alt="youtube"></a></li>
+                    </ul>
+                    <select>
+                        <option>관련 사이트</option>
+                        <option><a href="#">구글맵스</a></option>
+                    </select>
+                </div>
+                <div class="footer3">
+                    <ul>
+                        <li>회사소개</li>
+                        <li class="f_bold line">개인정보처리방침</li>
+                        <li class="line">여행약관</li>
+                        <li class="line">이용약관</li>
+                        <li class="line">여행보험</li>
+                        <li class="line">이메일무단수집거부</li>
+                    </ul>
+                    <p class="info">(주)여행에 반하다 대표이사 : 정예린 사업자번호 : 123-45-67890<br>부산광역시 부산진구 중앙대로 708&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>고객센터 1234-5678</span>&nbsp;&nbsp;&nbsp;평일 09시~18시(12시~13시 점심시간)(토/일/공휴일 휴무)</p>
+                    <p class="copyright">Copyright © SUMMERIN. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
